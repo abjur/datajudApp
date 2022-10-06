@@ -8,7 +8,7 @@
 mod_dados_ui <- function(id){
   ns <- shiny::NS(id)
 
-
+  con <- bq_connect()
   tribunais <- sort(DBI::dbListTables(con))
 
 
@@ -32,7 +32,7 @@ mod_dados_ui <- function(id){
     format = "yyyy-mm",
     startview = "month",
     language = "pt",
-    separator = " até "
+    separator = " at\u00E9 "
   )
 
   shiny::tagList(
@@ -43,7 +43,7 @@ mod_dados_ui <- function(id){
         title = shiny::tags$h2("Dados"), collapsible = FALSE, width = 12,
         shiny::tags$p(paste0(
           "Para fazer download dos dados utilizados neste painel, aplique os ",
-          "filtros desejados e clique no botão 'Download'."
+          "filtros desejados e clique no bot\u00E3o 'Download'."
         ))
       )
     ),
@@ -59,10 +59,10 @@ mod_dados_ui <- function(id){
         shiny::fluidRow(col_3(filtro_uf)),
         shiny::hr(),
         shiny::tags$h2("Filtros temporais"),
-        shiny::fluidRow(col_3("Em construção")),
+        shiny::fluidRow(col_3("Em constru\u00E7\u00E3o")),
         shiny::hr(),
         shiny::tags$h2("Filtros de escopo"),
-        shiny::fluidRow(col_3("Em construção")),
+        shiny::fluidRow(col_3("Em constru\u00E7\u00E3o")),
         shiny::hr(),
         shiny::fluidRow(shiny::tags$div(shiny::actionButton(
           ns("botao_filtrar"), "EXECUTAR"
@@ -126,7 +126,7 @@ mod_dados_server <- function(id, app_data) {
       tbl_init <- dplyr::tbl(con, tabela)
       # aplicacao dos filtros na base ----
       da_filtrado_lazy <- tbl_init |>
-        head(1000)
+        utils::head(1000)
 
       # collect ----
       usethis::ui_info("collect...")
