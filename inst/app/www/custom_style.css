@@ -1,0 +1,11 @@
+.dropdown-item.active, .dropdown-item:active {
+  color: #000 !important;
+}
+
+.form-control:focus {
+  border: 1px solid #ced4da !important;
+}
+
+.btn-light {
+  background-color: #f1f1f1 !important;
+}
